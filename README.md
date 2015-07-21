@@ -1,6 +1,6 @@
 # nodeTetris
 
-Juego online multijugador de Tetris.
+Juego online multi-jugador de Tetris.
 
 Realizado con:
 

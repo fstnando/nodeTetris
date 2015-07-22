@@ -44,70 +44,63 @@ function comprobar_lineas(obj){
 }
 
 io.on('connection', function(socket){
-    var patt = /sessionid=(\w+)/;
-    var found = socket.client.request.headers.cookie.match(patt);
-    var sessionid;
-    if(found){
-        sessionid = found[1];
-        console.log(sessionid);
-        if(!(socket.id in jugadores)){
-            var jugador = new Jugador(null, null);
-            jugador.mapa.set_mapa_loco();
-            jugadores[socket.id] = {'jugador': jugador, 'socket': socket};
-            console.log("Nuevo usuario: " + socket.id);
-        }else{
-            var jugador = jugadores[socket.id];
-        }
-        socket.emit('iniciar', {'id': socket.id, 'mapa': jugador.mapa.mapa, 'pieza': jugador.pieza});
-        socket.on('mover_iz', function(){
-            if(!jugadores[this.id].jugador.mover_iz())
-                socket.broadcast.emit('corregir', {'mapa': jugadores[this.id].jugador.mapa.mapa, 'pieza': jugadores[this.id].jugador.pieza});
-        });
-        socket.on('mover_de', function(){
-            if(!jugadores[this.id].jugador.mover_de())
-                socket.broadcast.emit('corregir', {'mapa': jugadores[this.id].jugador.mapa.mapa, 'pieza': jugadores[this.id].jugador.pieza});
-        });
-        socket.on('rotar_iz', function(){
-            if(!jugadores[this.id].jugador.rotar_iz())
-                socket.broadcast.emit('corregir', {'mapa': jugadores[this.id].jugador.mapa.mapa, 'pieza': jugadores[this.id].jugador.pieza});
-        });
-        socket.on('mover_ab', function(){
-            if(!jugadores[this.id].jugador.mover_ab())
-                socket.broadcast.emit('corregir', {'mapa': jugadores[this.id].jugador.mapa.mapa, 'pieza': jugadores[this.id].jugador.pieza});
-        });
-        socket.on('bajar', function(){
-            jugadores[this.id].jugador.bajar();
-            comprobar_lineas(jugadores[this.id]);
-            nueva_pieza(jugadores[this.id]);
-        });
-        socket.on('nueva_linea', function(){
-            jugadores[this.id].jugador.nueva_linea();
-            comprobar_lineas(jugadores[this.id]);
-            nueva_pieza(jugadores[this.id]);
-        });
-        socket.on('preparado', function(){
-            jugadores[this.id].jugador.preparado = true;
-            var preparado = true;
-            for(i in jugadores){
-                if(!jugadores[i].jugador.preparado){
-                    preparado = false;
-                    break;
-                }
-            }
-            if(preparado){
-                comienzo = true;
-                for(i in jugadores){
-                    jugadores[i].jugador.jugando = true;
-                    jugadores[i].socket.emit('comenzar');
-                }
-            }
-        });
-        socket.on('disconnect', function(){
-            delete jugadores[socket.id];
-            console.log("Usuario: " + socket.id + " desconectado");
-            socket.broadcast.emit('eliminar', {'id': this.id});
-        });
+    if(!(socket.id in jugadores)){
+        var jugador = new Jugador(null, null);
+        jugador.mapa.set_mapa_loco();
+        jugadores[socket.id] = {'jugador': jugador, 'socket': socket};
+        console.log("Nuevo usuario: " + socket.id);
+    }else{
+        var jugador = jugadores[socket.id];
     }
+    socket.emit('iniciar', {'id': socket.id, 'mapa': jugador.mapa.mapa, 'pieza': jugador.pieza});
+    socket.on('mover_iz', function(){
+        if(!jugadores[this.id].jugador.mover_iz())
+            socket.broadcast.emit('corregir', {'mapa': jugadores[this.id].jugador.mapa.mapa, 'pieza': jugadores[this.id].jugador.pieza});
+    });
+    socket.on('mover_de', function(){
+        if(!jugadores[this.id].jugador.mover_de())
+            socket.broadcast.emit('corregir', {'mapa': jugadores[this.id].jugador.mapa.mapa, 'pieza': jugadores[this.id].jugador.pieza});
+    });
+    socket.on('rotar_iz', function(){
+        if(!jugadores[this.id].jugador.rotar_iz())
+            socket.broadcast.emit('corregir', {'mapa': jugadores[this.id].jugador.mapa.mapa, 'pieza': jugadores[this.id].jugador.pieza});
+    });
+    socket.on('mover_ab', function(){
+        if(!jugadores[this.id].jugador.mover_ab())
+            socket.broadcast.emit('corregir', {'mapa': jugadores[this.id].jugador.mapa.mapa, 'pieza': jugadores[this.id].jugador.pieza});
+    });
+    socket.on('bajar', function(){
+        jugadores[this.id].jugador.bajar();
+        comprobar_lineas(jugadores[this.id]);
+        nueva_pieza(jugadores[this.id]);
+    });
+    socket.on('nueva_linea', function(){
+        jugadores[this.id].jugador.nueva_linea();
+        comprobar_lineas(jugadores[this.id]);
+        nueva_pieza(jugadores[this.id]);
+    });
+    socket.on('preparado', function(){
+        jugadores[this.id].jugador.preparado = true;
+        var preparado = true;
+        for(i in jugadores){
+            if(!jugadores[i].jugador.preparado){
+                preparado = false;
+                break;
+            }
+        }
+        if(preparado){
+            comienzo = true;
+            for(i in jugadores){
+                jugadores[i].jugador.jugando = true;
+                jugadores[i].socket.emit('comenzar');
+            }
+        }
+    });
+    socket.on('disconnect', function(){
+        delete jugadores[socket.id];
+        console.log("Usuario: " + socket.id + " desconectado");
+        socket.broadcast.emit('eliminar', {'id': this.id});
+    });
 });
 
 eval(fs.readFileSync('public/js/tetris.js')+'');

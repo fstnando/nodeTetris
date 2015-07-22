@@ -20,3 +20,8 @@ npm install
 node servidor.js
 ```
 Desde el navegador poner la siguiente url: [localhost:3000](http://localhost:3000)
+
+## Falta
+
+* Organizar condigo del servidor.
+* Agregar salas y/o partidas.

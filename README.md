@@ -2,22 +2,21 @@
 
 Juego online multi-jugador de Tetris.
 
-= Dependencias =
+## Dependencias
 
 * Node.js
 * Express.js
 * Socket.io
 
-=Instalación=
+## Instalación
 
-<code>
+```
 npm install
-</code>
+```
 
-=Ejecutar=
+## Ejecutar
 
-<code>
+```
 node servidor.js
-</code>
-
-Desde el navegador poner la siguiente url: http://localhost:3000
+```
+Desde el navegador poner la siguiente url: [localhost:3000](http://localhost:3000)

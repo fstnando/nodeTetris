@@ -1,0 +1,8 @@
+{
+  "name": "tetris",
+  "version": "0.0.1",
+  "description": "Aplicativo de Tetris",
+  "dependencies": {
+    "express": "^4.13.1"
+  }
+}

@@ -1,0 +1,78 @@
+body {
+    background: #000;
+    margin: 0px;
+    padding: 0px;
+}
+
+.ladrillo{
+    background: url('../img/ladrillo.jpg');
+    border-top: solid 1px #AAA;
+    border-left: solid 1px #AAA;
+    border-right: solid 1px #444;
+    border-bottom: solid 1px #444;
+}
+
+.fondo_verde{
+    background: #afa;
+}
+
+.espacio{
+    margin: 10px;
+}
+
+.flotante{
+    float:left;
+}
+
+#sig{
+    border-top: solid 1px #444;
+    border-left: solid 1px #444;
+    border-right: solid 1px #AAA;
+    border-bottom: solid 1px #AAA;
+}
+
+#pantalla_sig{
+    margin-left: 20px;
+    width: 82px;
+    height: 82px;
+    padding: 20px;
+    float:left;
+}
+
+#pantalla{
+    width: 202px;
+    height: 502px;
+    padding: 20px;
+    float:left;
+}
+
+#mapa{
+    padding: 0px;
+    margin: 0px;
+    border-top: solid 1px #444;
+    border-left: solid 1px #444;
+    border-right: solid 1px #AAA;
+    border-bottom: solid 1px #AAA;
+}
+
+.puntaje {
+    margin: 10px;
+    padding: 10px;
+    float:left;
+}
+
+.neon {
+    background: #000 none repeat scroll 0 0;
+}
+
+.neon div {
+    color: #fff;
+    font-family: "Museo";
+    font-size: 1em;
+    margin: 0.2em auto;
+    text-align: left;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de;
+    text-transform: uppercase;
+}
+
+.no-close .ui-dialog-titlebar-close {display: none }

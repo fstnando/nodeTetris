@@ -14,7 +14,7 @@
     <ul id="partidas">
     </ul>
     <script>
-  		var socket = io(':8080/sala');
+  		var socket = io('/sala');
   		socket.on('listado', function(listado){
   			console.log(listado);
   			$('#partidas').html('');

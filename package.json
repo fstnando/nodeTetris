@@ -4,7 +4,7 @@
   "scripts": {
     "start": "node app.js"
   },
-  "main": "server.js"
+  "main": "app.js",
   "dependencies": {
     "body-parser": "^1.13.2",
     "ejs": "*",

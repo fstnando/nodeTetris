@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/jquery/jquery-2.1.4.min.js"></script>
+    <script src="/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+    <link rel='stylesheet' href='/jquery-ui-1.11.4/jquery-ui.min.css' />
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <h1>NodeTetris - Sala</h1>
+    <p>Partidas:</p>
+    <ul id="partidas">
+    </ul>
+    <script>
+  		var socket = io(':8080/sala');
+  		socket.on('listado', function(listado){
+  			console.log(listado);
+  			$('#partidas').html('');
+  			for(var i=0;i<listado.length;i++)
+  				$('#partidas').append('<li><a href="/partida/'+listado[i].nio+'/">'+listado[i].nombre+' ('+listado[i].cj+'/'+listado[i].cantidad+')</a></li>');
+  		});
+	</script>
+  </body>
+</html>

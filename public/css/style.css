@@ -4,6 +4,10 @@ body {
     padding: 0px;
 }
 
+.color_rojo{
+	color:#F88;
+}
+
 .ladrillo{
     background: url('../img/ladrillo.jpg');
     border-top: solid 1px #AAA;

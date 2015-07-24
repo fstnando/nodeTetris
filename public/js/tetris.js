@@ -7,7 +7,12 @@ function Mapa(){
     for(var j=0;j<Mapa.my;j++){
         this.mapa.push([]);
         for(var i=0;i<Mapa.mx;i++)
-            this.mapa[j].push(0);
+            this.mapa[j].push(-1);
+    }
+    this.reset_mapa = function(){
+        for(var j=0;j<Mapa.my;j++)
+            for(var i=0;i<Mapa.mx;i++)
+                    this.mapa[j][i] = -1;
     }
     this.set_mapa_loco = function(){
         for(var j=0;j<Mapa.my;j++){
@@ -168,7 +173,17 @@ function Jugador(canvas, cansig){
     this.puntos = 0;
     this.lineas_enviar = [];
     this.jugando = false;
-    this.preparado = false;
+    this.socket = null;
+    
+    this.reset = function(){
+        this.jugando = false;
+        this.lineas_enviar = [];
+        this.lineas = 0;
+        this.consecutivas = 0;
+        this.puntos = 0;
+        this.mapa.reset_mapa();
+        this.pieza.nueva_pieza();
+    }
 
     this.comprobar_lineas = function(){
         var lineas = [];
@@ -274,27 +289,27 @@ function Jugador(canvas, cansig){
             switch(codigo){
                 case 37:
                     if(this.mover_iz())
-                        socket.emit('mover_iz');
+                        this.socket.emit('mover_iz');
                     break;
                 case 38:
                     if(this.rotar_iz())
-                        socket.emit('rotar_iz');
+                    	this.socket.emit('rotar_iz');
                     break;
                 case 39:
                     if(this.mover_de())
-                        socket.emit('mover_de');
+                    	this.socket.emit('mover_de');
                     break;
                 case 40:
                     if(this.mover_ab())
-                        socket.emit('mover_ab');
+                    	this.socket.emit('mover_ab');
                     else{
                         this.nueva_linea();
-                        socket.emit('nueva_linea');
+                        this.socket.emit('nueva_linea');
                     }
                     break;
                 case 32:
                     this.bajar();
-                    socket.emit('bajar');
+                    this.socket.emit('bajar');
                     break;
             }
             this.dibujar();

@@ -2,6 +2,10 @@
 
 Juego online multi-jugador de Tetris.
 
+## Juego
+
+El juego se basa en el tico Tetris. Cada partida tiene participantes y cuando uno de ellos realiza más de una linea estas son pasadas a los demas participantes. El ultimo participante en no perder es el ganador.
+
 ## Dependencias
 
 * Node.js
@@ -25,7 +29,6 @@ Desde el navegador poner la siguiente url: [localhost:3000](http://localhost:300
 
 http://tetris-fstnando.rhcloud.com/
 
-## Falta
+## A desarrollar
 
-* Organizar condigo del servidor.
-* Agregar salas y/o partidas.
+* Distintas formas de juego. (Por puntaje, Survival, etc...)

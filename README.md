@@ -32,3 +32,7 @@ http://tetris-fstnando.rhcloud.com/
 ## A desarrollar
 
 * Distintas formas de juego. (Por puntaje, Survival, etc...)
+
+## BUG en socket.io
+
+* Para corregir el bug del puerto en los namespace de socket.io ver: https://github.com/masakij/socket.io-client/commit/5abd97b2313aa3e9c9b2e1035dd4c24379fd77e8

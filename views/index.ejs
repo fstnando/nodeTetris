@@ -14,13 +14,12 @@
     <ul id="partidas">
     </ul>
     <script>
-  		var socket = io('/sala');
-  		socket.on('listado', function(listado){
-  			console.log(listado);
-  			$('#partidas').html('');
-  			for(var i=0;i<listado.length;i++)
-  				$('#partidas').append('<li><a href="/partida/'+listado[i].nio+'/">'+listado[i].nombre+' ('+listado[i].cj+'/'+listado[i].cantidad+')</a></li>');
-  		});
+        var socket = io('/sala');
+        socket.on('listado', function(listado){
+            $('#partidas').html('');
+            for(var i=0;i<listado.length;i++)
+                $('#partidas').append('<li><a href="/partida/'+listado[i].nio+'/">'+listado[i].nombre+' ('+listado[i].cj+'/'+listado[i].cantidad+')</a></li>');
+        });
 	</script>
   </body>
 </html>

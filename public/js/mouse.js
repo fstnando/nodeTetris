@@ -21,3 +21,16 @@ $(document).mouseup(function(e){
     Mouse.ly = e.pageY - Mouse.ly;
     Mouse.update();
 });
+$(window).on("touchstart", function(ev) {
+    Mouse.lx = e.pageX;
+    Mouse.ly = e.pageY;
+});
+$(window).on("touchmove", function(ev) {
+    Mouse.px = e.pageX;
+    Mouse.py = e.pageY;
+});
+$(window).on("touchend", function(ev) {
+    Mouse.lx = e.pageX - Mouse.lx;
+    Mouse.ly = e.pageY - Mouse.ly;
+    Mouse.update();
+});

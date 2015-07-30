@@ -20,7 +20,7 @@
         socket.on('listado', function(listado){
             $('#partidas').html('');
             for(var i=0;i<listado.length;i++)
-                $('#partidas').append('<li><a href="<%= req.config.path %>/partida/'+listado[i].nio+'/">'+listado[i].nombre+' ('+listado[i].cj+'/'+listado[i].cantidad+')</a></li>');
+                $('#partidas').append('<li><a href="<%= req.config.path %>/partida/' + socket.id +'/'+listado[i].nio+'/">'+listado[i].nombre+' ('+listado[i].cj+'/'+listado[i].cantidad+')</a></li>');
         });
         $(document).ready(function(){
             Mouse.update = function(){

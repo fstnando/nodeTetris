@@ -2,6 +2,7 @@
 
 Juego online multi-jugador de Tetris.
 
+  [![Build Status](https://travis-ci.org/fstnando/nodeTetris.svg)](https://travis-ci.org/fstnando/nodeTetris)
   [![Dependencies Status](https://david-dm.org/fstnando/nodeTetris.svg)](https://david-dm.org/fstnando/nodeTetris)
 
 ## Juego

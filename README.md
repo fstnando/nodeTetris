@@ -2,7 +2,7 @@
 
 Juego online multi-jugador de Tetris.
 
-[![NPM Downloads][downloads-image]][downloads-url]
+  [![NPM Downloads][downloads-image]][downloads-url]
 
 ## Juego
 

@@ -2,7 +2,7 @@
 
 Juego online multi-jugador de Tetris.
 
-  [![NPM Downloads][downloads-image]][downloads-url]
+  [![Dependencies Status](https://david-dm.org/fstnando/nodeTetris.svg)](https://david-dm.org/fstnando/nodeTetris)
 
 ## Juego
 

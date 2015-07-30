@@ -2,6 +2,8 @@
 
 Juego online multi-jugador de Tetris.
 
+[![NPM Downloads][downloads-image]][downloads-url]
+
 ## Juego
 
 El juego se basa en el típico Tetris. Cada partida tiene participantes y cuando uno de ellos realiza más de una linea estas son pasadas a los demás participantes. El ultimo participante en no perder es el ganador.

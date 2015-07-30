@@ -1,8 +1,14 @@
+var express = require('express');
+var router = express.Router();
+var config = require('../config');
 
-/*
- * GET home page.
- */
+router.use(function addConfig(req, res, next) {
+  req.config = config;
+  next();
+});
 
-exports.index = function(req, res){
-  res.render('index', { title: 'Prueba de titulo' });
-};
+router.get('/', function(req, res) {
+    res.render('index', { title: 'NodeTetris', req: req });
+});
+
+module.exports = router;

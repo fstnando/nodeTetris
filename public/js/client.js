@@ -14,9 +14,9 @@ window.addEventListener('keydown', function(e){
 });
 
 $(document).ready(function(){
-	var socket = io('/partida' + id_pagina);
+    var socket = io(':' + server_port + '/partida' + id_pagina, {path: server_path + "/socket.io"});
 	jugador.socket = socket;
-    jugador.jugando = true;
+    //jugador.jugando = true;
     
     Mouse.update = function(){
         var x = Math.round(Mouse.lx / (jugador.imapa.tam * 2));

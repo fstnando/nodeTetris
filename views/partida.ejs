@@ -2,11 +2,11 @@
 <html>
   <head>
     <title><%= title %></title>
-        <link rel="stylesheet" type="text/css" href="/css/style.css">
-        <script src="/js/jquery-2.1.4.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="/jquery-ui-1.11.4/jquery-ui.min.css">
-        <script src="/jquery-ui-1.11.4/jquery-ui.min.js"></script>
-        <script src="/js/mouse.js"></script>
+        <link rel="stylesheet" type="text/css" href="<%= req.config.path %>/css/style.css">
+        <script src="<%= req.config.path %>/js/jquery-2.1.4.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="<%= req.config.path %>/jquery-ui-1.11.4/jquery-ui.min.css">
+        <script src="<%= req.config.path %>/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+        <script src="<%= req.config.path %>/js/mouse.js"></script>
   </head>
   <body>
     <div class="neon">
@@ -35,12 +35,14 @@
     </div>
 
 	<script>
-		var id_pagina = <%= id %>;
+		var id_pagina = <%= req.params.id %>;
+		var server_port = "<%= req.headers.server_port %>";
+        var server_path = "<%= req.config.path %>";
 	</script>
-	<script src="/socket.io/socket.io.js"></script>
-    <script src="/js/tetris.js"></script>
-    <script src="/js/itetris.js"></script>
-	<script src="/js/client.js"></script>
+	<script src="<%= req.config.path %>/socket.io/socket.io.js"></script>
+    <script src="<%= req.config.path %>/js/tetris.js"></script>
+    <script src="<%= req.config.path %>/js/itetris.js"></script>
+	<script src="<%= req.config.path %>/js/client.js"></script>
   </body>
 </html>
 

@@ -1,8 +1,14 @@
+var express = require('express');
+var router = express.Router();
+var config = require('../config');
 
-/*
- * GET users listing.
- */
+router.use(function addConfig(req, res, next) {
+  req.config = config;
+  next();
+});
 
-exports.index = function(req, res){
-  res.render('partida', { title: 'Partida', id: req.params.id });
-};
+router.get('/:nombre/:id(\\d+)/', function(req, res) {
+    res.render('partida', { title: 'Partida', req: req });
+});
+
+module.exports = router;

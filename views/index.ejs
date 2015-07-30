@@ -2,12 +2,12 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="/jquery/jquery-2.1.4.min.js"></script>
-    <script src="/jquery-ui-1.11.4/jquery-ui.min.js"></script>
-    <link rel='stylesheet' href='/jquery-ui-1.11.4/jquery-ui.min.css' />
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/mouse.js"></script>
+    <link rel='stylesheet' href='<%= req.config.path %>/stylesheets/style.css' />
+    <script src="<%= req.config.path %>/jquery/jquery-2.1.4.min.js"></script>
+    <script src="<%= req.config.path %>/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+    <link rel='stylesheet' href='<%= req.config.path %>/jquery-ui-1.11.4/jquery-ui.min.css' />
+    <script src="<%= req.config.path %>/socket.io/socket.io.js"></script>
+    <script src="<%= req.config.path %>/js/mouse.js"></script>
   </head>
   <body>
     <h1>NodeTetris - Sala</h1>
@@ -16,11 +16,11 @@
     </ul>
     <div id="mouse"></div>
     <script>
-        var socket = io('/sala');
+        var socket = io(':<%= req.config.server_port %>/sala', {path: "<%= req.config.path %>/socket.io"});
         socket.on('listado', function(listado){
             $('#partidas').html('');
             for(var i=0;i<listado.length;i++)
-                $('#partidas').append('<li><a href="/partida/'+listado[i].nio+'/">'+listado[i].nombre+' ('+listado[i].cj+'/'+listado[i].cantidad+')</a></li>');
+                $('#partidas').append('<li><a href="<%= req.config.path %>/partida/'+listado[i].nio+'/">'+listado[i].nombre+' ('+listado[i].cj+'/'+listado[i].cantidad+')</a></li>');
         });
         $(document).ready(function(){
             Mouse.update = function(){

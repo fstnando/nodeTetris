@@ -16,6 +16,31 @@ window.addEventListener('keydown', function(e){
 $(document).ready(function(){
 	var socket = io('/partida' + id_pagina);
 	jugador.socket = socket;
+    jugador.jugando = true;
+    
+    Mouse.update = function(){
+        var x = Math.round(Mouse.lx / (jugador.imapa.tam * 2));
+        var y = Math.round(Mouse.ly / (jugador.imapa.tam * 2));
+        while(x>0){
+            if(jugador.mover_de())
+                jugador.socket.emit('mover_de');
+            x-=1;
+        }
+        while(x<0){
+            if(jugador.mover_iz())
+                jugador.socket.emit('mover_iz');
+            x+=1;
+        }
+        if(y>0){
+            jugador.bajar();
+            jugador.socket.emit('bajar');
+        }
+        if(y<0){
+            if(jugador.rotar_iz())
+                jugador.socket.emit('rotar_iz');
+        }
+        jugador.dibujar();
+    }
 
 	socket.on('connect', function () {
 	    $('#id_nombre').html(socket.id);

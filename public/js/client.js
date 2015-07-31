@@ -14,7 +14,7 @@ window.addEventListener('keydown', function(e){
 });
 
 $(document).ready(function(){
-    var socket = io(':' + server_port + '/partida' + id_pagina, {path: server_path + "/socket.io"});
+    var socket = io(':' + client_port + '/partida' + id_pagina, {path: server_path + "/socket.io"});
 	jugador.socket = socket;
     //jugador.jugando = true;
     

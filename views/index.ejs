@@ -16,7 +16,7 @@
     </ul>
     <div id="mouse"></div>
     <script>
-        var socket = io(':<%= req.config.server_port %>/sala', {path: "<%= req.config.path %>/socket.io"});
+        var socket = io(':<%= req.config.client_port %>/sala', {path: "<%= req.config.path %>/socket.io"});
         socket.on('listado', function(listado){
             $('#partidas').html('');
             for(var i=0;i<listado.length;i++)

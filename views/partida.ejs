@@ -6,6 +6,7 @@
         <script src="<%= req.config.path %>/js/jquery-2.1.4.min.js"></script>
         <link rel="stylesheet" type="text/css" href="<%= req.config.path %>/jquery-ui-1.11.4/jquery-ui.min.css">
         <script src="<%= req.config.path %>/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+        <script src="<%= req.config.path %>/js/jquery.touchSwipe.min"></script>
         <script src="<%= req.config.path %>/js/mouse.js"></script>
   </head>
   <body>
@@ -36,7 +37,7 @@
 
 	<script>
 		var id_pagina = <%= req.params.id %>;
-		var server_port = "<%= req.headers.server_port %>";
+		var client_port = "<%= req.headers.client_port %>";
         var server_path = "<%= req.config.path %>";
 	</script>
 	<script src="<%= req.config.path %>/socket.io/socket.io.js"></script>

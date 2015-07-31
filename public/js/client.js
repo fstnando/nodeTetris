@@ -1,19 +1,17 @@
-var a_canvas = document.getElementById("mapa");
+var a_canvas = document.getElementById("pantalla");
 var canvas = a_canvas.getContext("2d");
-$(a_canvas).width(IMapa.tam * Mapa.mx);
-$(a_canvas).height(IMapa.tam * Mapa.my);
-$(a_canvas).parent().css('padding', IMapa.tam);
 
-var a_cansig = document.getElementById("sig");
-var cansig = a_cansig.getContext("2d");
-$(a_cansig).width(IMapa.tam * 4);
-$(a_cansig).height(IMapa.tam * 4);
-$(a_cansig).parent().css('padding', IMapa.tam);
+var jugador = new Jugador(a_canvas, canvas);
+jugador.mapa.set_mapa_loco();
 
-var jugador = new Jugador(canvas, cansig);
-jugador.dibujar();
+var pos = 0;
 
-var oponentes = {};
+jugador.mensaje = 'Iniciando';
+
+$(window).resize(function() {
+    jugador.ipantalla.configurar();
+});
+jugador.ipantalla.configurar();
 
 window.addEventListener('keydown', function(e){
     jugador.teclas(e.keyCode || e.which);
@@ -70,15 +68,6 @@ $(document).ready(function(){
 	socket.on('connect', function () {
 	    $('#id_nombre').html(socket.id);
 	    
-	    $('#id_nombre').click(function(){
-	        $('#dialog-jugador').dialog('open');
-	    });
-	    
-	    $('#cambiar_nombre').click(function(){
-	        $('#dialog-jugador').dialog('open');
-	        return false;
-	    });
-	    
 	    //	Eventos de la partida
 	    
 	    socket.on('partida_completa', function(){
@@ -87,11 +76,15 @@ $(document).ready(function(){
 	    });
 	    
 	    socket.on('esperando', function(tiempo){
-			$('#esperando').html('Comenzando en: ' + tiempo);
+			//$('#esperando').html('Comenzando en: ' + tiempo);
+            jugador.mensaje = tiempo;
+            jugador.ipantalla.dibujar();
 	    });
 	    
 	    socket.on('estado', function(estado){
-			$('#estado').html(estado);
+			//$('#estado').html(estado);
+            jugador.estado = estado;
+            jugador.ipantalla.dibujar();
 	    });
 	    
 	    //	Eventos del Juego
@@ -99,6 +92,8 @@ $(document).ready(function(){
 	    socket.on('iniciar', function(datos){
 	    	$('#estado').html('Jugando');
             $('#esperando').html('');
+            jugador.mensaje = '';
+            jugador.estado = '';
 	        jugador.reset();
 	        jugador.mapa.mapa = datos.mapa;
 	        jugador.pieza.x = datos.pieza.x;
@@ -136,62 +131,43 @@ $(document).ready(function(){
 	    });
 
 	    socket.on('mapa', function(datos){
-	        if(!(datos.id in oponentes)){
-	            $('#op').append('<div class="ladrillo flotante"><canvas id="mapa_'+datos.id+'" class="fondo_verde espacio" width="100" height="250"></canvas></div>');
-	            var op = $('#mapa_'+datos.id);
-	            var canvas = op[0].getContext("2d");
+	        if(!(datos.id in jugador.oponentes)){
 	            var mapa = new Mapa();
 	            mapa.mapa = datos.mapa;
-	            var imapa = new IMapa(canvas, mapa);
-	            imapa.tam = 10;
-	            oponentes[datos.id] = {
-	                'canvas': canvas,
+	            jugador.oponentes[datos.id] = {
 	                'mapa': mapa,
-	                'imapa': imapa
+	                'pos': pos
 	            };
-	            var el = $('#listado_oponentes').find('li.mapa_'+datos.id);
-	            if(el.length == 0){
-	                $('#listado_oponentes').append('<li class="mapa_'+datos.id+'">'+datos.id+'</li>');
-	            }
+                pos += 1;
 	        }
-	        oponentes[datos.id].mapa.mapa = datos.mapa;
-	        oponentes[datos.id].imapa.dibujar();
+	        jugador.oponentes[datos.id].mapa.mapa = datos.mapa;
+	        jugador.dibujar();
 	    });
 
 	    socket.on('eliminar', function(id){
-	        if(id in oponentes){
-	            $('#mapa_'+id).parent().remove();
-	            $('#listado_oponentes').find('li.mapa_'+id).remove();
-	            delete oponentes[id];
+	        if(id in jugador.oponentes){
+	            delete jugador.oponentes[id];
 	        }
 	    });
 
 	    socket.on('comenzar', function(){
 	        jugador.jugando = true;
-	        $( "#dialog-perdistes" ).dialog('close');
-	        $( "#dialog-ganastes" ).dialog('close');
+            jugador.mensaje = '';
+            jugador.estado = '';
 	    });
 
 	    socket.on('perder', function(){
-	    	$('#estado').html('Perdiste!!!');
+	    	//$('#estado').html('Perdiste!!!');
+            jugador.estado = 'Perdiste';
 	        jugador.jugando = false;
+            jugador.ipantalla.dibujar();
 	    });
 
 	    socket.on('ganador', function(){
-	    	$('#estado').html('Ganaste!!!');
+	    	//$('#estado').html('Ganaste!!!');
+            jugador.estado = 'Ganaste';
 	        jugador.jugando = false;
+            jugador.ipantalla.dibujar();
 	    });
-	});
-	dialog = $( "#dialog-jugador" ).dialog({
-	  autoOpen: false,
-	  modal: true,
-	  buttons: {
-	    "Aceptar": function(){
-	        var nombre = $('#nombre').val();
-	        $('#id_nombre').html(nombre);
-	        socket.emit('set_nombre', nombre);
-	        dialog.dialog( "close" );
-	    }
-	  }
 	});
 });

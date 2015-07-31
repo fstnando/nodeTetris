@@ -3,10 +3,12 @@ Mouse.lx = 0;
 Mouse.ly = 0;
 Mouse.px = 0;
 Mouse.py = 0;
-Mouse.tam = $(window).width() / 4;
+screen_tamx = $(window).width();
+screen_tamy = $(window).height();
 
 $(window).resize(function() {
-    Mouse.tam = $(window).width() / 4;
+    screen_tamx = $(window).width();
+    screen_tamy = $(window).height();
 });
 
 Mouse.update = function(){

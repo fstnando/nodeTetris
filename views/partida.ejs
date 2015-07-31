@@ -3,53 +3,36 @@
   <head>
     <title><%= title %></title>
         <link rel="stylesheet" type="text/css" href="<%= req.config.path %>/css/style.css">
+        <!--
         <link rel="stylesheet" href="<%= req.config.path %>/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="<%= req.config.path %>/bootstrap/css/bootstrap-theme.min.css">
-        <script src="<%= req.config.path %>/js/jquery-2.1.4.min.js"></script>
         <link rel="stylesheet" type="text/css" href="<%= req.config.path %>/jquery-ui-1.11.4/jquery-ui.min.css">
         <script src="<%= req.config.path %>/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+        -->
+        <script src="<%= req.config.path %>/js/jquery-2.1.4.min.js"></script>
         <script src="<%= req.config.path %>/js/jquery.touchSwipe.min.js"></script>
         <script src="<%= req.config.path %>/js/mouse.js"></script>
+        <style>
+            body{
+                background: #000;
+                padding: 0px;
+                margin: 0px;
+                overflow: hidden;
+            }
+        </style>
   </head>
-  <body style="background:#000">
-    <div class="container">
-        <div class="row">
-            <div class="neon">
-                <div>Nombre: <span id="id_nombre" class="color_rojo"></span> <a id="cambiar_nombre" href="#">Cambiar</a>
-                    <span id="estado"></span>
-                    <span id="esperando"></span>
-                </div>
-                <div id="pantalla" class="ladrillo">
-                    <canvas id="mapa" class="fondo_verde" width="200" height="500"></canvas>
-                </div>
-                <div id="pantalla_sig" class="ladrillo">
-                    <canvas id="sig" class="fondo_verde" width="80" height="80"></canvas>
-                </div>
-            </div>
-            <div class="puntaje neon">
-                <div>Puntos: <font id="puntaje">0</font></div>
-                <div>Lineas: <font id="lineas">0</font></div>
-            </div>
-            <div id="op" class="puntaje neon">
-                <div>Oponenetes:</div>
-            </div>
-
-            <div id="dialog-jugador" title="Datos del Jugador">
-                <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" id="nombre" value="" maxlength="20">
-            </div>
-        </div>
-    </div>
-
-	<script>
-		var id_pagina = <%= req.params.id %>;
-		var client_port = "<%= req.headers.client_port %>";
-        var server_path = "<%= req.config.path %>";
-	</script>
-	<script src="<%= req.config.path %>/socket.io/socket.io.js"></script>
-    <script src="<%= req.config.path %>/js/tetris.js"></script>
-    <script src="<%= req.config.path %>/js/itetris.js"></script>
-	<script src="<%= req.config.path %>/js/client.js"></script>
-  </body>
+    <body>
+        <canvas id="pantalla" class="fondo_verde" width="200" height="500"></canvas>
+        
+        <script>
+            var id_pagina = <%= req.params.id %>;
+            var client_port = "<%= req.headers.client_port %>";
+            var server_path = "<%= req.config.path %>";
+        </script>
+        <script src="<%= req.config.path %>/socket.io/socket.io.js"></script>
+        <script src="<%= req.config.path %>/js/tetris.js"></script>
+        <script src="<%= req.config.path %>/js/itetris.js"></script>
+        <script src="<%= req.config.path %>/js/client.js"></script>
+    </body>
 </html>
 

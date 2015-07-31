@@ -161,19 +161,21 @@ Pieza.piezas = [
     [[1,1],[0,1],[0,0],[-1,0],[-1,0],[1,1]],
 ]
 
-function Jugador(canvas, cansig){
+function Jugador(pantalla, canvas){
     this.canvas = canvas;
-    this.cansig = cansig;
+    this.pantalla = pantalla;
     this.mapa = new Mapa();
-    this.imapa = new IMapa(this.canvas, this.mapa);
     this.pieza = new Pieza();
-    this.ipieza = new IPieza(this.canvas, this.cansig, this.pieza);
+    this.ipantalla = new IPantalla(this);
     this.lineas = 0;
     this.consecutivas = 0;
     this.puntos = 0;
     this.lineas_enviar = [];
     this.jugando = false;
     this.socket = null;
+    this.oponentes = {};
+    this.mensaje = "";
+    this.estado = "";
     
     this.reset = function(){
         this.jugando = false;
@@ -230,11 +232,6 @@ function Jugador(canvas, cansig){
         this.mapa.marcar_pieza(this.pieza);
         this.comprobar_lineas();
         this.pieza.nueva_pieza();
-    }
-
-    this.cambiar_puntaje = function(){
-        $('#puntaje').html(this.puntos);
-        $('#lineas').html(this.lineas);
     }
 
     this.mover_ab = function(){
@@ -317,10 +314,7 @@ function Jugador(canvas, cansig){
     }
 
     this.dibujar = function(){
-        this.imapa.dibujar();
-        this.ipieza.dibujar();
-        this.ipieza.dibsig();
-        this.cambiar_puntaje();
+        this.ipantalla.dibujar();
     }
 }
 Jugador.T_AR = 38;

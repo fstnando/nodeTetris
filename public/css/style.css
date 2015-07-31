@@ -4,6 +4,11 @@ body {
     padding: 0px;
 }
 
+canvas{
+    margin: 0px;
+    padding: 0px;
+}
+
 .titulo {
     background: #8f8 none repeat scroll 0 0;
     margin: 0;
@@ -43,37 +48,6 @@ body {
 
 .flotante{
     float:left;
-}
-
-#sig{
-    border-top: solid 1px #444;
-    border-left: solid 1px #444;
-    border-right: solid 1px #AAA;
-    border-bottom: solid 1px #AAA;
-}
-
-#pantalla_sig{
-    margin-left: 20px;
-    /*width: 122px;
-    height: 122px;*/
-    padding: 20px;
-    float:left;
-}
-
-#pantalla{
-    /*width: 242px;
-    height: 542px;*/
-    padding: 20px;
-    float:left;
-}
-
-#mapa{
-    padding: 0px;
-    margin: 0px;
-    border-top: solid 1px #444;
-    border-left: solid 1px #444;
-    border-right: solid 1px #AAA;
-    border-bottom: solid 1px #AAA;
 }
 
 .puntaje {

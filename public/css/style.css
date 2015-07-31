@@ -4,6 +4,23 @@ body {
     padding: 0px;
 }
 
+.titulo {
+    background: #8f8 none repeat scroll 0 0;
+    margin: 0;
+    opacity: 0.5;
+    padding: 0.8em 1em;
+    text-align: center;
+}
+
+.titulo h1 {
+    color: #070;
+    font-family: "League-Gothic",Courier;
+    font-size: 2.6em;
+    font-weight: 900;
+    text-align: center;
+    text-shadow: 0 0.06em 0.06em #3a3;
+}
+
 .color_rojo{
 	color:#F88;
 }
@@ -37,15 +54,15 @@ body {
 
 #pantalla_sig{
     margin-left: 20px;
-    width: 82px;
-    height: 82px;
+    /*width: 122px;
+    height: 122px;*/
     padding: 20px;
     float:left;
 }
 
 #pantalla{
-    width: 202px;
-    height: 502px;
+    /*width: 242px;
+    height: 542px;*/
     padding: 20px;
     float:left;
 }

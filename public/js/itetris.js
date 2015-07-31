@@ -57,7 +57,7 @@ function IMapa(canvas, mapa){
         }
     }
 }
-IMapa.tam = 20;
+IMapa.tam = 16;
 IMapa.colores = ['#FF4444', '#888888', '#88FFFF', '#FFFF44', '#FF44FF', '#4444FF', '#44FF44']
 
 function IPieza(canvas, cansig, pieza){

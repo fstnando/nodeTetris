@@ -2,30 +2,38 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='<%= req.config.path %>/stylesheets/style.css' />
+    <link rel="stylesheet" href="<%= req.config.path %>/css/style.css">
+    <link rel="stylesheet" href="<%= req.config.path %>/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%= req.config.path %>/bootstrap/css/bootstrap-theme.min.css">
     <script src="<%= req.config.path %>/jquery/jquery-2.1.4.min.js"></script>
     <script src="<%= req.config.path %>/jquery-ui-1.11.4/jquery-ui.min.js"></script>
     <link rel='stylesheet' href='<%= req.config.path %>/jquery-ui-1.11.4/jquery-ui.min.css' />
     <script src="<%= req.config.path %>/socket.io/socket.io.js"></script>
     <script src="<%= req.config.path %>/js/mouse.js"></script>
+    <script src="<%= req.config.path %>/bootstrap/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <h1>NodeTetris - Sala</h1>
-    <p>Partidas:</p>
-    <ul id="partidas">
-    </ul>
-    <div id="mouse"></div>
+    <div class="titulo">
+        <h1>NodeTetris</h1>
+    </div>
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <h1 class="page-header">
+                    Partidas:
+                </h1>
+                <ul id="partidas">
+                </ul>
+            </div>
+        </div>
+    </div>
+    
     <script>
         var socket = io(':<%= req.config.client_port %>/sala', {path: "<%= req.config.path %>/socket.io"});
         socket.on('listado', function(listado){
             $('#partidas').html('');
             for(var i=0;i<listado.length;i++)
                 $('#partidas').append('<li><a href="<%= req.config.path %>/partida/' + socket.id +'/'+listado[i].nio+'/">'+listado[i].nombre+' ('+listado[i].cj+'/'+listado[i].cantidad+')</a></li>');
-        });
-        $(document).ready(function(){
-            Mouse.update = function(){
-                $('#mouse').html(this.lx + ":" + this.ly);
-            }
         });
 	</script>
   </body>

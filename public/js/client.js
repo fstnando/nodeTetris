@@ -1,8 +1,14 @@
 var a_canvas = document.getElementById("mapa");
 var canvas = a_canvas.getContext("2d");
+$(a_canvas).width(IMapa.tam * Mapa.mx);
+$(a_canvas).height(IMapa.tam * Mapa.my);
+$(a_canvas).parent().css('padding', IMapa.tam);
 
 var a_cansig = document.getElementById("sig");
 var cansig = a_cansig.getContext("2d");
+$(a_cansig).width(IMapa.tam * 4);
+$(a_cansig).height(IMapa.tam * 4);
+$(a_cansig).parent().css('padding', IMapa.tam);
 
 var jugador = new Jugador(canvas, cansig);
 jugador.dibujar();
@@ -17,10 +23,29 @@ $(document).ready(function(){
     var socket = io(':' + client_port + '/partida' + id_pagina, {path: server_path + "/socket.io"});
 	jugador.socket = socket;
     //jugador.jugando = true;
+
+    $(document).swipe( {
+        swipeLeft: function(event, direction, distance, duration, fingerCount){
+            if(jugador.mover_iz())
+                jugador.socket.emit('mover_iz');
+        },
+        swipeRight: function(event, direction, distance, duration, fingerCount){
+            if(jugador.mover_de())
+                jugador.socket.emit('mover_de');
+        },
+        swipeUp: function(event, direction, distance, duration, fingerCount){
+            if(jugador.rotar_iz())
+                jugador.socket.emit('rotar_iz');
+        },
+        swipeDown: function(event, direction, distance, duration, fingerCount){
+            jugador.bajar();
+            jugador.socket.emit('bajar');
+        }
+    });
     
     Mouse.update = function(){
-        var x = Math.round(Mouse.lx / (jugador.imapa.tam * 2));
-        var y = Math.round(Mouse.ly / (jugador.imapa.tam * 2));
+        var x = Math.round(Mouse.lx / Mouse.tam);
+        var y = Math.round(Mouse.ly / Mouse.tam);
         while(x>0){
             if(jugador.mover_de())
                 jugador.socket.emit('mover_de');

@@ -95,9 +95,11 @@ function Pieza(){
         }
     }
     this.regenerar = function(){
+        console.log(this.pieza_actual);
         for(var i=0;i<6;i++)
-            for(var j=0;j<2;j++)
+            for(var j=0;j<2;j++){
                 this.p[i][j] = Pieza.piezas[this.pieza_actual][i][j];
+            }
     }
     this.mover_iz = function(){
         this.x = this.x - 1;
@@ -135,6 +137,14 @@ function Pieza(){
                 this.p[5][i] = this.p[4][i];
                 this.p[4][i] = aux;
             }
+    }
+    this.reset = function(){
+        this.x = 5;
+        this.y = 3;
+        this.pieza_actual = entreAB(0, 6);
+        this.pieza_sig = [];
+        for(var i=0;i<10;i++)
+            this.pieza_sig.push(entreAB(0, 6));
     }
     this.nueva_pieza = function(){
         this.x = 5;
@@ -184,7 +194,7 @@ function Jugador(pantalla, canvas){
         this.consecutivas = 0;
         this.puntos = 0;
         this.mapa.reset_mapa();
-        this.pieza.nueva_pieza();
+        this.pieza.reset();
     }
 
     this.comprobar_lineas = function(){

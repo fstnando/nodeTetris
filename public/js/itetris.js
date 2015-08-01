@@ -63,6 +63,7 @@ function IPantalla(parent){
     }
     
     this.dibujar_puntos = function(){
+        this.parent.canvas.textAlign="left"; 
         this.parent.canvas.fillStyle = 'blue';
         this.parent.canvas.font = (IPantalla.tam * 1.2) + "px Arial";
         this.parent.canvas.clearRect(this.pux, this.puy, this.pux + IPantalla.tam * 10, this.puy + IPantalla.tam * 4);
@@ -71,19 +72,27 @@ function IPantalla(parent){
     }
     
     this.dibujar_mensaje = function(){
+        this.parent.canvas.textAlign="center"; 
+        this.parent.canvas.shadowColor = "black";
+        this.parent.canvas.shadowOffsetX = 5; 
+        this.parent.canvas.shadowOffsetY = 5; 
+        this.parent.canvas.shadowBlur = 7;
+
         if(this.parent.mensaje){
             this.parent.canvas.fillStyle = 'green';
             this.parent.canvas.font = (IPantalla.tam * 2) + "px Arial";
-            var lx = this.parent.canvas.measureText(this.parent.mensaje).width / 2;
-            this.parent.canvas.fillText(this.parent.mensaje, IPantalla.tam * ((Mapa.mx + 2) / 2) - lx, IPantalla.tam * (Mapa.my / 2));
+            this.parent.canvas.fillText(this.parent.mensaje, IPantalla.tam * ((Mapa.mx + 2) / 2), IPantalla.tam * (Mapa.my / 2));
         }
         if(this.parent.estado!=null){
             this.parent.canvas.fillStyle = 'green';
             var texto = Jugador.estado[this.parent.estado];
             this.parent.canvas.font = (IPantalla.tam / 2 ) + "px Arial";
-            var lx = this.parent.canvas.measureText(texto).width / 2;
-            this.parent.canvas.fillText(texto, IPantalla.tam * ((Mapa.mx + 2) / 2) - lx, IPantalla.tam * (Mapa.my / 2 + 2));
+            this.parent.canvas.fillText(texto, IPantalla.tam * ((Mapa.mx + 2) / 2), IPantalla.tam * (Mapa.my / 2 + 2));
         }
+        this.parent.canvas.shadowColor = "";
+        this.parent.canvas.shadowOffsetX = 0; 
+        this.parent.canvas.shadowOffsetY = 0; 
+        this.parent.canvas.shadowBlur = 0;
     }
     
     this.dibujar_border = function(){

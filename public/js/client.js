@@ -125,22 +125,6 @@ $(document).ready(function(){
 	        jugador.dibujar();
 	    });
 
-        /*
-	    socket.on('mapa', function(datos){
-	        if(!(datos.id in jugador.oponentes)){
-	            var mapa = new Mapa();
-	            mapa.mapa = datos.mapa;
-	            jugador.oponentes[datos.id] = {
-	                'mapa': mapa,
-	                'pos': pos
-	            };
-                pos += 1;
-	        }
-	        jugador.oponentes[datos.id].mapa.mapa = datos.mapa;
-	        jugador.dibujar();
-	    });
-        */
-
 	    socket.on('oponentes', function(oponentes){
             delete oponentes[socket.id];
             jugador.oponentes = oponentes;

@@ -77,6 +77,7 @@ function IPantalla(parent){
             var lx = this.parent.canvas.measureText(this.parent.mensaje).width / 2;
             this.parent.canvas.fillText(this.parent.mensaje, IPantalla.tam * ((Mapa.mx + 2) / 2) - lx, IPantalla.tam * (Mapa.my / 2));
             this.parent.canvas.font = (IPantalla.tam / 2 ) + "px Arial";
+            var lx = this.parent.canvas.measureText(this.parent.estado).width / 2;
             this.parent.canvas.fillText(this.parent.estado, IPantalla.tam * ((Mapa.mx + 2) / 2) - lx, IPantalla.tam * (Mapa.my / 2 + 2));
         }
     }
@@ -114,10 +115,11 @@ function IPantalla(parent){
     }
     
     this.dibujar_oponentes = function(){
-        this.parent.canvas.clearRect(this.ox + ax, this.oy + ay, this.pan_x, this.pan_y);
+        this.parent.canvas.clearRect(this.ox, this.oy, this.pan_x, this.pan_y);
+        var pos = 0;
         for(el in this.parent.oponentes){
             var op = this.parent.oponentes[el];
-            var ax = (op.pos % 3) * (Mapa.mx + 1) * IPantalla.tam_op;
+            var ax = (pos % 3) * (Mapa.mx + 1) * IPantalla.tam_op;
             var ay = Math.floor(op.pos / 3) * (Mapa.my + 1) * IPantalla.tam_op;
             for(var i=0;i<=Mapa.mx + 1;i++){
                 dibCuaB(this.parent.canvas, this.ox + ax + i * IPantalla.tam_op, this.oy + ay, 1, IPantalla.tam_op);
@@ -131,6 +133,7 @@ function IPantalla(parent){
                 for(var j=0;j<Mapa.my;j++)
                     if(op.mapa.mapa[j][i]!=-1)
                         dibCuaB(this.parent.canvas, this.ox + ax + (i + 1) * IPantalla.tam_op, this.oy + ay + (j + 1) * IPantalla.tam_op, op.mapa.mapa[j][i], IPantalla.tam_op);
+            pos++;
         }
     }
     

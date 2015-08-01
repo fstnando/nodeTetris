@@ -145,8 +145,10 @@ $(document).ready(function(){
 	    });
 
 	    socket.on('eliminar', function(id){
+            console.log(id);
 	        if(id in jugador.oponentes){
 	            delete jugador.oponentes[id];
+                console.log(jugador.oponentes);
 	        }
 	    });
 

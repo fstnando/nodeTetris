@@ -83,7 +83,6 @@ $(document).ready(function(){
 	    });
 	    
 	    socket.on('estado', function(estado){
-            console.log(estado);
             jugador.estado = estado;
             jugador.ipantalla.dibujar();
 	    });
@@ -136,10 +135,8 @@ $(document).ready(function(){
 	    });
 
 	    socket.on('eliminar', function(id){
-            console.log(id);
 	        if(id in jugador.oponentes){
 	            delete jugador.oponentes[id];
-                console.log(jugador.oponentes);
 	        }
 	    });
 

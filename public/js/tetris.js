@@ -95,7 +95,6 @@ function Pieza(){
         }
     }
     this.regenerar = function(){
-        console.log(this.pieza_actual);
         for(var i=0;i<6;i++)
             for(var j=0;j<2;j++){
                 this.p[i][j] = Pieza.piezas[this.pieza_actual][i][j];

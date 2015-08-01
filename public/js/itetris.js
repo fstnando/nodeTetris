@@ -76,9 +76,13 @@ function IPantalla(parent){
             this.parent.canvas.font = (IPantalla.tam * 2) + "px Arial";
             var lx = this.parent.canvas.measureText(this.parent.mensaje).width / 2;
             this.parent.canvas.fillText(this.parent.mensaje, IPantalla.tam * ((Mapa.mx + 2) / 2) - lx, IPantalla.tam * (Mapa.my / 2));
+        }
+        if(this.parent.estado!=null){
+            this.parent.canvas.fillStyle = 'green';
+            var texto = Jugador.estado[this.parent.estado];
             this.parent.canvas.font = (IPantalla.tam / 2 ) + "px Arial";
-            var lx = this.parent.canvas.measureText(this.parent.estado).width / 2;
-            this.parent.canvas.fillText(this.parent.estado, IPantalla.tam * ((Mapa.mx + 2) / 2) - lx, IPantalla.tam * (Mapa.my / 2 + 2));
+            var lx = this.parent.canvas.measureText(texto).width / 2;
+            this.parent.canvas.fillText(texto, IPantalla.tam * ((Mapa.mx + 2) / 2) - lx, IPantalla.tam * (Mapa.my / 2 + 2));
         }
     }
     
@@ -115,25 +119,27 @@ function IPantalla(parent){
     }
     
     this.dibujar_oponentes = function(){
-        this.parent.canvas.clearRect(this.ox, this.oy, this.pan_x, this.pan_y);
+        this.parent.canvas.clearRect(this.ox - 1, this.oy - 1, this.pan_x, this.pan_y);
         var pos = 0;
         for(el in this.parent.oponentes){
             var op = this.parent.oponentes[el];
-            var ax = (pos % 3) * (Mapa.mx + 1) * IPantalla.tam_op;
-            var ay = Math.floor(op.pos / 3) * (Mapa.my + 1) * IPantalla.tam_op;
-            for(var i=0;i<=Mapa.mx + 1;i++){
-                dibCuaB(this.parent.canvas, this.ox + ax + i * IPantalla.tam_op, this.oy + ay, 1, IPantalla.tam_op);
-                dibCuaB(this.parent.canvas, this.ox + ax + i * IPantalla.tam_op, this.oy + ay + (Mapa.my + 1) * IPantalla.tam_op, 1, IPantalla.tam_op);
+            if(op.estado==null){
+                var ax = (pos % 3) * (Mapa.mx + 1) * IPantalla.tam_op;
+                var ay = Math.floor(pos / 3) * (Mapa.my + 1) * IPantalla.tam_op;
+                for(var i=0;i<=Mapa.mx + 1;i++){
+                    dibCuaB(this.parent.canvas, this.ox + ax + i * IPantalla.tam_op, this.oy + ay, 1, IPantalla.tam_op);
+                    dibCuaB(this.parent.canvas, this.ox + ax + i * IPantalla.tam_op, this.oy + ay + (Mapa.my + 1) * IPantalla.tam_op, 1, IPantalla.tam_op);
+                }
+                for(var j=1;j<=Mapa.my;j++){
+                    dibCuaB(this.parent.canvas, this.ox + ax, this.oy + ay + j * IPantalla.tam_op, 1, IPantalla.tam_op);
+                    dibCuaB(this.parent.canvas, this.ox + ax + (Mapa.mx + 1) * IPantalla.tam_op, this.oy + ay + j * IPantalla.tam_op, 1, IPantalla.tam_op);
+                }
+                for(var i=0;i<Mapa.mx;i++)
+                    for(var j=0;j<Mapa.my;j++)
+                        if(op.mapa[j][i]!=-1)
+                            dibCuaB(this.parent.canvas, this.ox + ax + (i + 1) * IPantalla.tam_op, this.oy + ay + (j + 1) * IPantalla.tam_op, op.mapa[j][i], IPantalla.tam_op);
+                pos++;
             }
-            for(var j=1;j<=Mapa.my;j++){
-                dibCuaB(this.parent.canvas, this.ox + ax, this.oy + ay + j * IPantalla.tam_op, 1, IPantalla.tam_op);
-                dibCuaB(this.parent.canvas, this.ox + ax + (Mapa.mx + 1) * IPantalla.tam_op, this.oy + ay + j * IPantalla.tam_op, 1, IPantalla.tam_op);
-            }
-            for(var i=0;i<Mapa.mx;i++)
-                for(var j=0;j<Mapa.my;j++)
-                    if(op.mapa.mapa[j][i]!=-1)
-                        dibCuaB(this.parent.canvas, this.ox + ax + (i + 1) * IPantalla.tam_op, this.oy + ay + (j + 1) * IPantalla.tam_op, op.mapa.mapa[j][i], IPantalla.tam_op);
-            pos++;
         }
     }
     

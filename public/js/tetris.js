@@ -175,7 +175,7 @@ function Jugador(pantalla, canvas){
     this.socket = null;
     this.oponentes = {};
     this.mensaje = "";
-    this.estado = "";
+    this.estado = null;
     
     this.reset = function(){
         this.jugando = false;
@@ -322,4 +322,9 @@ Jugador.T_AB = 40;
 Jugador.T_IZ = 37;
 Jugador.T_DE = 40;
 Jugador.T_BAJAR = 32;
-
+Jugador.estado = {
+    0: 'Esperando más jugadores',
+    1: 'Esperando nueva partida',
+    2: '¡¡¡Ganaste!!!',
+    3: 'Perdiste'
+}

@@ -6,8 +6,6 @@ jugador.mapa.set_mapa_loco();
 
 var pos = 0;
 
-jugador.mensaje = 'Iniciando';
-
 $(window).resize(function() {
     jugador.ipantalla.configurar();
 });
@@ -76,13 +74,12 @@ $(document).ready(function(){
 	    });
 	    
 	    socket.on('esperando', function(tiempo){
-			//$('#esperando').html('Comenzando en: ' + tiempo);
             jugador.mensaje = tiempo;
             jugador.ipantalla.dibujar();
 	    });
 	    
 	    socket.on('estado', function(estado){
-			//$('#estado').html(estado);
+            console.log(estado);
             jugador.estado = estado;
             jugador.ipantalla.dibujar();
 	    });
@@ -90,10 +87,8 @@ $(document).ready(function(){
 	    //	Eventos del Juego
 
 	    socket.on('iniciar', function(datos){
-	    	$('#estado').html('Jugando');
-            $('#esperando').html('');
             jugador.mensaje = '';
-            jugador.estado = '';
+            jugador.estado = null;
 	        jugador.reset();
 	        jugador.mapa.mapa = datos.mapa;
 	        jugador.pieza.x = datos.pieza.x;
@@ -130,6 +125,7 @@ $(document).ready(function(){
 	        jugador.dibujar();
 	    });
 
+        /*
 	    socket.on('mapa', function(datos){
 	        if(!(datos.id in jugador.oponentes)){
 	            var mapa = new Mapa();
@@ -143,6 +139,13 @@ $(document).ready(function(){
 	        jugador.oponentes[datos.id].mapa.mapa = datos.mapa;
 	        jugador.dibujar();
 	    });
+        */
+
+	    socket.on('oponentes', function(oponentes){
+            delete oponentes[socket.id];
+            jugador.oponentes = oponentes;
+	        jugador.ipantalla.dibujar_oponentes();
+	    });
 
 	    socket.on('eliminar', function(id){
             console.log(id);
@@ -155,19 +158,17 @@ $(document).ready(function(){
 	    socket.on('comenzar', function(){
 	        jugador.jugando = true;
             jugador.mensaje = '';
-            jugador.estado = '';
+            jugador.estado = null;
 	    });
 
 	    socket.on('perder', function(){
-	    	//$('#estado').html('Perdiste!!!');
-            jugador.estado = 'Perdiste';
+            jugador.estado = 3;
 	        jugador.jugando = false;
             jugador.ipantalla.dibujar();
 	    });
 
 	    socket.on('ganador', function(){
-	    	//$('#estado').html('Ganaste!!!');
-            jugador.estado = 'Ganaste';
+            jugador.estado = 2;
 	        jugador.jugando = false;
             jugador.ipantalla.dibujar();
 	    });

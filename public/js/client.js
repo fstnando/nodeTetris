@@ -24,18 +24,22 @@ $(document).ready(function(){
         swipeLeft: function(event, direction, distance, duration, fingerCount){
             if(jugador.mover_iz())
                 jugador.socket.emit('mover_iz');
+            jugador.dibujar();
         },
         swipeRight: function(event, direction, distance, duration, fingerCount){
             if(jugador.mover_de())
                 jugador.socket.emit('mover_de');
+            jugador.dibujar();
         },
         swipeUp: function(event, direction, distance, duration, fingerCount){
             if(jugador.rotar_iz())
                 jugador.socket.emit('rotar_iz');
+            jugador.dibujar();
         },
         swipeDown: function(event, direction, distance, duration, fingerCount){
             jugador.bajar();
             jugador.socket.emit('bajar');
+            jugador.dibujar();
         }
     });
     

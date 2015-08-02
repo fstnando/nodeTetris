@@ -21,6 +21,14 @@ El juego se basa en el típico Tetris. Cada partida tiene participantes y cuando
 npm install
 ```
 
+## Configuración
+
+Para realizar la configuración utilizar el archivo *config.js*. Por ejemplo para correr en servidor local poner:
+
+```
+config.client_port = 8080
+```
+
 ## Ejecutar
 
 ```

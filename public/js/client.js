@@ -113,6 +113,7 @@ $(document).ready(function(){
 	        jugador.pieza.pieza_sig = datos.pieza.pieza_sig;
 	        jugador.pieza.regenerar();
 	        jugador.dibujar();
+            delete datos;
 	    });
 
 	    socket.on('mover_ab', function(){
@@ -128,6 +129,7 @@ $(document).ready(function(){
 	    socket.on('recibir_lineas', function(lineas_enviar){
 	        jugador.mapa.insertar_lineas(lineas_enviar);
 	        jugador.dibujar();
+            delete lineas_enviar;
 	    });
 
 	    socket.on('oponentes', function(oponentes){

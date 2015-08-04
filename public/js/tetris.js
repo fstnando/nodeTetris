@@ -3,7 +3,7 @@ function entreAB(a, b){
 }
 
 function Mapa(){
-    this.mapa = []
+    this.mapa = [];
     for(var j=0;j<Mapa.my;j++){
         this.mapa.push([]);
         for(var i=0;i<Mapa.mx;i++)
@@ -376,6 +376,7 @@ function Jugador(pantalla, canvas){
                     this.socket.emit('bajar');
                     break;
             }
+            this.lineas_enviar = [];
             this.dibujar();
         }
     }

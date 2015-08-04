@@ -60,7 +60,7 @@ function main_loop() {
     sala.bucle();
     setTimeout(function(){
         process.nextTick(main_loop);
-    }, 1000);
+    }, 100);
 }
 
 process.nextTick(main_loop);

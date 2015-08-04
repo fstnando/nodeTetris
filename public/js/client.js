@@ -92,10 +92,15 @@ $(document).ready(function(){
 	    socket.on('iniciar', function(datos){
             jugador.mensaje = '';
             jugador.estado = null;
+<<<<<<< HEAD
+	        //jugador.reset();
+=======
 	        jugador.reset();
+>>>>>>> origin/master
 	        jugador.mapa.mapa = datos.mapa;
 	        jugador.pieza.x = datos.pieza.x;
 	        jugador.pieza.y = datos.pieza.y;
+	        jugador.pieza.rot = datos.pieza.rot;
 	        jugador.pieza.pieza_actual = datos.pieza.pieza_actual;
 	        jugador.pieza.pieza_sig = datos.pieza.pieza_sig;
 	        jugador.pieza.regenerar();
@@ -107,6 +112,7 @@ $(document).ready(function(){
 	        jugador.mapa.mapa = datos.mapa;
 	        jugador.pieza.x = datos.pieza.x;
 	        jugador.pieza.y = datos.pieza.y;
+	        jugador.pieza.rot = datos.pieza.rot;
 	        jugador.pieza.pieza_actual = datos.pieza.pieza_actual;
 	        jugador.pieza.pieza_sig = datos.pieza.pieza_sig;
 	        jugador.pieza.regenerar();

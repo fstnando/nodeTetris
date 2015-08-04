@@ -75,6 +75,47 @@ function Mapa(){
         for(var j=0;j<lineas.length;j++)
             this.mapa[Mapa.my - lineas.length + j] = lineas[j].slice(0);
     }
+    this.estadistica = function(){
+        var altura = [];
+        var espacios = 0;
+        var lineas = 0;
+        var menor = Mapa.my;
+        var mayor = 0;
+        for(var i=0;i<Mapa.mx;i++){
+            var j =  0;
+            while(j<Mapa.my && this.mapa[j][i]==-1)
+                j++;
+            altura.push(j);
+            if(j<menor)
+                menor = j;
+            if(j>mayor)
+                mayor = j;
+            j++;
+            while(j<Mapa.my){
+                if(this.mapa[j][i]==-1)
+                    espacios++;
+                j++;
+            }
+        }
+        diff = 0;
+        for(var i=0;i<Mapa.mx - 1;i++)
+            diff += Math.abs(altura[i] - altura[i + 1]);
+        
+        prom = 0;
+        for(var i=0;i<Mapa.mx;i++)
+            prom += Math.pow(Mapa.mx - altura[i], 2);
+        prom = prom / Mapa.mx;
+        
+        for(var j=0;j<Mapa.my;j++)
+            if(this.es_linea_completa(j))
+                lineas++;
+        if(lineas==1)
+            lineas = 0;
+        if(mayor - menor < 10)
+            return [lineas, espacios, diff]
+        else
+            return [lineas, diff, espacios]
+    }
 }
 Mapa.mx = 10
 Mapa.my = 25
@@ -82,6 +123,7 @@ Mapa.my = 25
 function Pieza(){
     this.x = 5;
     this.y = 3;
+    this.rot = 0;
     this.pieza_actual = entreAB(0, 6);
     this.p = [];
     this.pieza_sig = [];
@@ -119,6 +161,7 @@ function Pieza(){
             this.p[i][1] = aux;
         }
         this._rec_max_min();
+        this.rot = (this.rot + 1) % 4;
     }
     this.rotar_de = function(){
         for(var i=0;i<6;i++){
@@ -127,6 +170,7 @@ function Pieza(){
             this.p[i][1] = -aux;
         }
         this._rec_max_min();
+        this.rot = (this.rot - 1) % 4;
     }
     this._rec_max_min = function(){
         var aux;
@@ -140,6 +184,10 @@ function Pieza(){
     this.reset = function(){
         this.x = 5;
         this.y = 3;
+<<<<<<< HEAD
+        this.rot = 0;
+=======
+>>>>>>> origin/master
         this.pieza_actual = entreAB(0, 6);
         this.pieza_sig = [];
         for(var i=0;i<10;i++)
@@ -148,9 +196,22 @@ function Pieza(){
     this.nueva_pieza = function(){
         this.x = 5;
         this.y = 3;
+        this.rot = 0;
         this.pieza_actual = this.pieza_sig.shift();
         //this.pieza_sig.push(entreAB(0, 6));
         this.regenerar();
+    }
+    this.clonar = function(){
+        var nueva = new Pieza();
+        nueva.x = this.x;
+        nueva.y = this.y;
+        nueva.rot = this.rot;
+        nueva.pieza_actual = this.pieza_actual;
+        nueva.pieza_sig = [];
+        for(var i=0;i<10;i++)
+            nueva.pieza_sig.push(this.pieza_sig[i]);
+        nueva.regenerar();
+        return nueva;
     }
 }
 Pieza.piezas = [

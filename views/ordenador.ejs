@@ -27,13 +27,15 @@
         
         <script>
             var id_pagina = <%= req.params.id %>;
-            var client_port = "<%= req.config.client_port %>";
+            var client_port = "<%= req.headers.client_port %>";
             var server_path = "<%= req.config.path %>";
         </script>
         <script src="<%= req.config.path %>/socket.io/socket.io.js"></script>
         <script src="<%= req.config.path %>/js/tetris.js"></script>
         <script src="<%= req.config.path %>/js/itetris.js"></script>
         <script src="<%= req.config.path %>/js/client.js"></script>
+        <script src="<%= req.config.path %>/js/ordenador.js"></script>
     </body>
 </html>
 
+ 

@@ -7,8 +7,12 @@ router.use(function addConfig(req, res, next) {
   next();
 });
 
+router.get('/ordenador/:id(\\d+)/', function(req, res) {
+    res.render('ordenador', { title: 'NodeTetris - Partida', req: req });
+});
+
 router.get('/:nombre/:id(\\d+)/', function(req, res) {
-    res.render('partida', { title: 'Partida', req: req });
+    res.render('partida', { title: 'NodeTetris - Partida', req: req });
 });
 
 module.exports = router;

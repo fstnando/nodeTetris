@@ -184,10 +184,7 @@ function Pieza(){
     this.reset = function(){
         this.x = 5;
         this.y = 3;
-<<<<<<< HEAD
         this.rot = 0;
-=======
->>>>>>> origin/master
         this.pieza_actual = entreAB(0, 6);
         this.pieza_sig = [];
         for(var i=0;i<10;i++)

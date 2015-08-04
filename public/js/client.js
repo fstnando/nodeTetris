@@ -92,11 +92,7 @@ $(document).ready(function(){
 	    socket.on('iniciar', function(datos){
             jugador.mensaje = '';
             jugador.estado = null;
-<<<<<<< HEAD
 	        //jugador.reset();
-=======
-	        jugador.reset();
->>>>>>> origin/master
 	        jugador.mapa.mapa = datos.mapa;
 	        jugador.pieza.x = datos.pieza.x;
 	        jugador.pieza.y = datos.pieza.y;

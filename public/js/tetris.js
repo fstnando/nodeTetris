@@ -250,6 +250,8 @@ function Jugador(pantalla, canvas){
         this.jugando = false;
         this.lineas_enviar = [];
         this.lineas_recibir = [];
+        this.oponentes = {};
+        this.estado = null;
         this.lineas = 0;
         this.consecutivas = 0;
         this.puntos = 0;

@@ -106,7 +106,7 @@ $(document).ready(function(){
         socket.on('iniciar', function(datos){
             jugador.mensaje = '';
             jugador.estado = null;
-            //jugador.reset();
+            jugador.reset();
             jugador.mapa.mapa = datos.mapa;
             jugador.pieza.x = datos.pieza.x;
             jugador.pieza.y = datos.pieza.y;
@@ -121,6 +121,7 @@ $(document).ready(function(){
         });
 
         socket.on('corregir', function(datos){
+            console.log(datos);
             jugador.mapa.mapa = datos.mapa;
             jugador.pieza.x = datos.pieza.x;
             jugador.pieza.y = datos.pieza.y;

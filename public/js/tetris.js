@@ -253,6 +253,7 @@ function Jugador(pantalla, canvas){
         this.lineas = 0;
         this.consecutivas = 0;
         this.puntos = 0;
+        this.tiempo = 0;
         this.mapa.reset_mapa();
         this.pieza.reset();
     }

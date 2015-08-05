@@ -21,20 +21,50 @@
         <div class="container">
             <div class="row">
                 <h1 class="page-header">
+                    Nombre:
+                </h1>
+                <input type="text" name="nombre" id="nombre" value=""/>
+            </div>
+            <div class="row">
+                <h1 class="page-header">
                     Partidas:
                 </h1>
-                <ul id="partidas">
-                </ul>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Online</th>
+                            <th>Maximos</th>
+                            <th>Tipo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="partidas">
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
     
     <script>
         var socket = io(':<%= req.config.client_port %>/sala', {path: "<%= req.config.path %>/socket.io"});
+        var path = "<%= req.config.path %>";
         socket.on('listado', function(listado){
+            $('#nombre').val(socket.id);
             $('#partidas').html('');
             for(var i=0;i<listado.length;i++)
-                $('#partidas').append('<li><a href="<%= req.config.path %>/partida/' + socket.id +'/'+listado[i].nio+'/">'+listado[i].nombre+' ('+listado[i].cj+'/'+listado[i].cantidad+')</a></li>');
+                $('#partidas').append('\
+<tr>\
+    <td><input type="hidden" name="partida" value="'+listado[i].nio+'" />'+listado[i].nombre+'</td>\
+    <td>'+listado[i].cj+'</td>\
+    <td>'+listado[i].cantidad+'</td>\
+    <td>Clasico</td>\
+</tr>\
+                ');
+            $('#partidas tr').click(function(){
+                var nombre = $('#nombre').val();
+                var partida = $(this).find('input[name="partida"]').val();
+                window.location.href = path + "/partida/" + nombre + "/" + partida + "/";
+            });
         });
 	</script>
   </body>

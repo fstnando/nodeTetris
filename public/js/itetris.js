@@ -60,8 +60,20 @@ function IPantalla(parent){
         this.dibujar_oponentes();
         this.dibujar_puntos();
         this.dibujar_mensaje();
+        this.dibujar_lin_rec();
     }
     
+    this.dibujar_lin_rec = function(){
+        var posx = IPantalla.tam + IPantalla.tam * (Mapa.mx + 1);
+        var posy = IPantalla.tam;
+        this.parent.canvas.clearRect(posx, IPantalla.tam * 6, IPantalla.tam - 1, IPantalla.tam * Mapa.my);
+        var cant = this.parent.lineas_recibir.length;
+        if(cant > 0){
+            for(var i=1; i<=cant; i++)
+                dibCuaB(this.parent.canvas, posx, posy + IPantalla.tam * (Mapa.my - i), 3, IPantalla.tam - 1);
+        }
+    }
+
     this.dibujar_puntos = function(){
         this.parent.canvas.textAlign="left"; 
         this.parent.canvas.fillStyle = 'blue';

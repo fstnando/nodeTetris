@@ -161,24 +161,28 @@ function IAOrdenador(){
         
         if(jugador.pieza.rot<movida[1]){
             if(jugador.rotar_iz()){
-                jugador.socket.emit('rotar_iz');
+                jugador.socket.emit('rotar_iz', jugador.tiempo, jugador.pieza);
+                jugador.tiempo++;
                 jugador.dibujar();
             }
         }else
         if(jugador.pieza.x>movida[0]){
             if(jugador.mover_iz()){
-                jugador.socket.emit('mover_iz');
+                jugador.socket.emit('mover_iz', jugador.tiempo, jugador.pieza);
+                jugador.tiempo++;
                 jugador.dibujar();
             }
         }else
         if(jugador.pieza.x<movida[0]){
             if(jugador.mover_de()){
-                jugador.socket.emit('mover_de');
+                jugador.socket.emit('mover_de', jugador.tiempo, jugador.pieza);
+                jugador.tiempo++;
                 jugador.dibujar();
             }
         }else{
             jugador.bajar();
-            jugador.socket.emit('bajar');
+            jugador.socket.emit('bajar', jugador.tiempo, jugador.pieza);
+            jugador.tiempo++;
             jugador.dibujar();
         }
         jugador.lineas_enviar = [];
@@ -186,7 +190,6 @@ function IAOrdenador(){
     delete pieza;
     delete pieza_sig;
     delete movida;
-    setTimeout('IAOrdenador()', 10);
 }
 
-setTimeout('IAOrdenador()', 10);
+setInterval('IAOrdenador()', 500);

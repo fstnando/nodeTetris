@@ -238,15 +238,18 @@ function Jugador(pantalla, canvas){
     this.consecutivas = 0;
     this.puntos = 0;
     this.lineas_enviar = [];
+    this.lineas_recibir = [];
     this.jugando = false;
     this.socket = null;
     this.oponentes = {};
     this.mensaje = "";
     this.estado = null;
+    this.tiempo = 0;
     
     this.reset = function(){
         this.jugando = false;
         this.lineas_enviar = [];
+        this.lineas_recibir = [];
         this.lineas = 0;
         this.consecutivas = 0;
         this.puntos = 0;
@@ -299,6 +302,10 @@ function Jugador(pantalla, canvas){
         this.mapa.marcar_pieza(this.pieza);
         this.comprobar_lineas();
         this.pieza.nueva_pieza();
+        if(this.lineas_recibir.length > 0){
+            this.mapa.insertar_lineas(this.lineas_recibir);
+            this.lineas_recibir = [];
+        }
     }
 
     this.mover_ab = function(){
@@ -352,31 +359,39 @@ function Jugador(pantalla, canvas){
         if(this.jugando){
             switch(codigo){
                 case 37:
-                    if(this.mover_iz())
-                        this.socket.emit('mover_iz');
+                    if(this.mover_iz()){
+                        this.socket.emit('mover_iz', this.tiempo, this.pieza);
+                        this.tiempo++;
+                    }
                     break;
                 case 38:
-                    if(this.rotar_iz())
-                    	this.socket.emit('rotar_iz');
+                    if(this.rotar_iz()){
+                    	this.socket.emit('rotar_iz', this.tiempo, this.pieza);
+                        this.tiempo++;
+                    }
                     break;
                 case 39:
-                    if(this.mover_de())
-                    	this.socket.emit('mover_de');
+                    if(this.mover_de()){
+                    	this.socket.emit('mover_de', this.tiempo, this.pieza);
+                        this.tiempo++;
+                    }
                     break;
                 case 40:
-                    if(this.mover_ab())
-                    	this.socket.emit('mover_ab');
-                    else{
+                    if(this.mover_ab()){
+                    	this.socket.emit('mover_ab', this.tiempo, this.pieza);
+                        this.tiempo++;
+                    }else{
                         this.nueva_linea();
-                        this.socket.emit('nueva_linea');
+                        this.socket.emit('nueva_linea', this.tiempo, this.pieza);
+                        this.tiempo++;
                     }
                     break;
                 case 32:
                     this.bajar();
-                    this.socket.emit('bajar');
+                    this.socket.emit('bajar', this.tiempo, this.pieza);
+                    this.tiempo++;
                     break;
             }
-            this.lineas_enviar = [];
             this.dibujar();
         }
     }

@@ -191,5 +191,3 @@ function IAOrdenador(){
     delete pieza_sig;
     delete movida;
 }
-
-setInterval('IAOrdenador()', 500);

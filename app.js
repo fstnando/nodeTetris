@@ -55,6 +55,14 @@ var sala = new partidas.Sala(io);
 sala.crear_partida('0', 'General - 2 Jugadores', 2);
 sala.crear_partida('1', 'General - 4 Jugadores', 4);
 sala.crear_partida('2', 'General - 6 Jugadores', 6);
+var p4 = sala.crear_partida('3', 'Masa - 1 Jugadores - 1 IA', 2);
+var p5 = sala.crear_partida('4', 'Masa - 4 Jugadores - 2 IA', 6);
+
+p4.crear_jugador_ia('Meringo');
+
+p5.crear_jugador_ia('NatSuMa');
+p5.crear_jugador_ia('Pedro');
+
 
 function main_loop() {
     sala.bucle();

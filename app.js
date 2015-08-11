@@ -2,7 +2,6 @@ var config = require('./config');
 var express = require('express');
 var routes = require('./routes/index');
 var partida = require('./routes/partida');
-var birds = require('./routes/birds');
 var http = require('http');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -36,17 +35,6 @@ app.get(config.path + '/socket.io/socket.io.js',function(req,res) {
 
 app.use(config.path + '/', routes);
 app.use(config.path + '/partida', partida);
-app.use(config.path + '/birds', birds);
-app.get(config.path + '/:name(\\w+)/', function(req, res) {
-    res.send(req.params.name);
-});
-
-
-/*
-if ('development' == app.get('env')) {
-  app.use(errorHandler());
-}
-*/
 
 var server = http.createServer(app); 
 var io = require('socket.io')(server, { pingTimeout: 5000, pingInterval: 5000, path: config.path + "/socket.io"});
@@ -72,12 +60,6 @@ function main_loop() {
 }
 
 process.nextTick(main_loop);
-
-/*
-server.listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
-*/
 
 server.listen(config.server_port, config.server_ip_address, function () {
     console.log( "Listening on " + config.server_ip_address + ", server_port " + config.server_port )

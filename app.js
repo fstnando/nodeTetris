@@ -36,7 +36,7 @@ app.get(config.path + '/socket.io/socket.io.js',function(req,res) {
 app.use(config.path + '/', routes);
 app.use(config.path + '/partida', partida);
 
-var server = http.createServer(app); 
+var server = http.createServer(app);
 var io = require('socket.io')(server, { pingTimeout: 5000, pingInterval: 5000, path: config.path + "/socket.io"});
 
 var sala = new partidas.Sala(io);

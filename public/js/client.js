@@ -84,6 +84,8 @@ $(document).ready(function(){
     socket.on('connect', function () {
         $('#id_nombre').html(socket.id);
         
+        jugador.nombre = socket.id;
+        
         //	Eventos de la partida
         
         socket.on('partida_completa', function(){

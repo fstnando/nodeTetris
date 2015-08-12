@@ -24,6 +24,16 @@ function Mapa(){
             }
         }
     }
+    this.set_mapa_rayado = function(){
+        for(var j=Mapa.my-5;j<Mapa.my;j++){
+            for(var i=0;i<Mapa.mx;i++){
+                if(entreAB(0,10)<5)
+                    this.mapa[j][i] = 0;
+                else
+                    this.mapa[j][i] = -1;
+            }
+        }
+    }
     this.pieza_valida = function(pieza){
         var salida = true;
         if(pieza.x + pieza.p[4][0] >=0 &&
@@ -114,7 +124,7 @@ function Mapa(){
         if(mayor - menor < 10)
             return [lineas, espacios, diff]
         else
-            return [lineas, diff, espacios]
+            return [lineas, espacios, diff]
     }
 }
 Mapa.mx = 10

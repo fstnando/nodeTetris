@@ -68,6 +68,8 @@ function IPantalla(parent){
         var posy = IPantalla.tam;
         this.parent.canvas.clearRect(posx, IPantalla.tam * 6, IPantalla.tam - 1, IPantalla.tam * Mapa.my);
         var cant = this.parent.lineas_recibir.length;
+        if(cant > 20)
+            cant = 20;
         if(cant > 0){
             for(var i=1; i<=cant; i++)
                 dibCuaB(this.parent.canvas, posx, posy + IPantalla.tam * (Mapa.my - i), 3, IPantalla.tam - 1);
@@ -165,7 +167,7 @@ function IPantalla(parent){
                         if(op.mapa[j][i]!=-1)
                             dibCuaB(this.parent.canvas, this.ox + ax + (i + 1) * IPantalla.tam_op, this.oy + ay + (j + 1) * IPantalla.tam_op, op.mapa[j][i], IPantalla.tam_op);
                 for(var i=0;i<4;i++)
-                    dibCuaB(this.parent.canvas, this.ox + ax + (op.pieza.x + op.pieza.p[i][0] + 1) * IPantalla.tam_op, this.oy + ay + (op.pieza.y + this.parent.pieza.p[i][1] + 1) * IPantalla.tam_op, op.pieza.pieza_actual, IPantalla.tam_op);
+                    dibCuaB(this.parent.canvas, this.ox + ax + (op.pieza.x + op.pieza.p[i][0] + 1) * IPantalla.tam_op, this.oy + ay + (op.pieza.y + op.pieza.p[i][1] + 1) * IPantalla.tam_op, op.pieza.pieza_actual, IPantalla.tam_op);
                 pos++;
             }
         }

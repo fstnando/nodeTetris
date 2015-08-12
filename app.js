@@ -46,10 +46,18 @@ sala.crear_partida('2', 'General - 6 Jugadores', 6);
 var p4 = sala.crear_partida('3', 'Masa - 1 Jugadores - 1 IA', 2);
 var p5 = sala.crear_partida('4', 'Masa - 4 Jugadores - 2 IA', 6);
 
-p4.crear_jugador_ia('Meringo');
-
-p5.crear_jugador_ia('NatSuMa');
-p5.crear_jugador_ia('Pedro');
+ia1 = p4.crear_jugador_ia('Meringo');
+var iia1 = setInterval(function(){
+    ia1.movimiento_ia();
+}, 50);
+ia2 = p5.crear_jugador_ia('NatSuMa');
+var iia2 = setInterval(function(){
+    ia2.movimiento_ia();
+}, 50);
+ia3 = p5.crear_jugador_ia('Pedro');
+var iia3 = setInterval(function(){
+    ia3.movimiento_ia();
+}, 50);
 
 
 function main_loop() {

@@ -1,13 +1,13 @@
 function comparar_est(est1, est2){
-    if(est1[0]>est2[0] || 
+    if(est1[0] > est2[0] || 
         (est1[0] == est2[0] &&
             est1[1] < est2[1]) ||
         (est1[0] == est2[0] &&
             est1[1] == est2[1] &&
             est1[2] < est2[2]))
-        return false;
-    else
         return true;
+    else
+        return false;
 }
 
 function calcular_movida_rec(lista, mapa){
@@ -31,7 +31,7 @@ function calcular_movida_rec(lista, mapa){
 
                 mapa.marcar_pieza(pieza);
                 var new_est = calcular_movida_rec(lista.slice(1), mapa);
-                if(estadistica < 0 || comparar_est(estadistica, new_est)){
+                if(estadistica < 0 || comparar_est(new_est, estadistica)){
                     estadistica = new_est;
                 }
                 delete new_est;
@@ -75,7 +75,7 @@ function calcular_movida(lista, mapa){
 
             mapa.marcar_pieza(pieza);
             var new_est = calcular_movida_rec(lista.slice(1), mapa);
-            if(movimientos < 0 || comparar_est(movimientos[2], new_est)){
+            if(movimientos < 0 || comparar_est(new_est, movimientos[2])){
                 movimientos = [pieza.x, r, new_est];
             }
             delete new_est;

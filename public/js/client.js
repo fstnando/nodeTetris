@@ -2,7 +2,7 @@ var a_canvas = document.getElementById("pantalla");
 var canvas = a_canvas.getContext("2d");
 
 var jugador = new Jugador(a_canvas, canvas);
-jugador.mapa.set_mapa_loco();
+//jugador.mapa.set_mapa_loco();
 
 var pos = 0;
 
@@ -123,7 +123,6 @@ $(document).ready(function(){
         });
 
         socket.on('corregir', function(datos){
-            console.log(datos);
             jugador.mapa.mapa = datos.mapa;
             jugador.pieza.x = datos.pieza.x;
             jugador.pieza.y = datos.pieza.y;
@@ -170,7 +169,17 @@ $(document).ready(function(){
             jugador.estado = null;
         });
 
-        socket.on('perder', function(){
+        socket.on('perder', function(datos){
+            jugador.mapa.mapa = datos.mapa;
+            jugador.pieza.x = datos.pieza.x;
+            jugador.pieza.y = datos.pieza.y;
+            jugador.pieza.rot = datos.pieza.rot;
+            jugador.pieza.pieza_actual = datos.pieza.pieza_actual;
+            jugador.pieza.pieza_sig = datos.pieza.pieza_sig;
+            jugador.pieza.regenerar();
+            jugador.tiempo = datos.tiempo;
+            jugador.dibujar();
+            delete datos;
             jugador.estado = 3;
             jugador.jugando = false;
             jugador.ipantalla.dibujar();

@@ -40,7 +40,7 @@ Desde el navegador poner la siguiente url: [localhost:8080](http://localhost:808
 
 http://tetris-fstnando.rhcloud.com/
 
-http://fstnando.no-ip.org/tetris/
+http://www.fstnando.com.ar/tetris/
 
 ## A desarrollar
 
